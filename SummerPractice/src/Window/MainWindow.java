@@ -11,13 +11,19 @@ public class MainWindow extends JPanel {
 
     //private Graph graph;
     private Algorithm algorithm;
+    private GraphField graphField;
     ///////////////////////////////
 
     public MainWindow() {
-        setBackground(new Color(161, 151, 225));    //РЈСЃС‚Р°РЅРѕРІРёРј С†РІРµС‚ Р·Р°РґРЅРµРіРѕ С„РѕРЅР°
+        algorithm = new APD(new AdjacenyList(), new AdjacenyList());
+
+
+        setBackground(new Color(161, 151, 225));    //Установим цвет заднего фона
 
         add( createButtons() );
-        add(new GraphField( (algorithm = new APD(new AdjacenyList(), new AdjacenyList())) ) );
+        graphField = new GraphField( (algorithm));
+        add(graphField);
+
 
     }
 
@@ -35,32 +41,32 @@ public class MainWindow extends JPanel {
     }
 
 
-    // РЎРѕР·РґР°РЅРёРµ РїР°РЅРµР»СЊРєРё СЃ РєРЅРѕРїРєР°РјРё, СѓРїСЂР°РІР»СЏСЋС‰РёРјРё Р°Р»РіРѕСЂРёС‚РјРѕРј
+    // Создание панельки с кнопками, управляющими алгоритмом
     private JPanel createAlgorithmButtons() {
         JPanel algorithmButtons = new JPanel( new GridLayout(7, 1) );
 
-        algorithmButtons.add(new JButton(new AbstractAction("РЎС‚Р°СЂС‚") {
+        algorithmButtons.add(new JButton(new AbstractAction("Старт") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startAlgorithm();
             }
         }));
         algorithmButtons.add(Box.createVerticalStrut(5));
-        algorithmButtons.add(new JButton(new AbstractAction("РЎР»РµРґСѓСЋС‰РёР№ С€Р°Рі") {
+        algorithmButtons.add(new JButton(new AbstractAction("Следующий шаг") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 nextStep();
             }
         }));
         algorithmButtons.add(Box.createVerticalStrut(5));
-        algorithmButtons.add(new JButton(new AbstractAction("Р РµР·СѓР»СЊС‚Р°С‚") {
+        algorithmButtons.add(new JButton(new AbstractAction("Результат") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 result();
             }
         }));
         algorithmButtons.add(Box.createVerticalStrut(5));
-        algorithmButtons.add(new JButton(new AbstractAction("РћС‡РёСЃС‚РєР°") {
+        algorithmButtons.add(new JButton(new AbstractAction("Очистка") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearAll();
@@ -71,7 +77,7 @@ public class MainWindow extends JPanel {
         return algorithmButtons;
     }
 
-    // РЎРѕР·РґР°РЅРёРµ РїР°РЅРµР»СЊРєРё СЃ РєРЅРѕРїРєР°РјРё, СѓРїСЂР°РІР»СЏСЋС‰РёРјРё СЃРѕР·РґР°РЅРёРµРј РіСЂР°С„Р°
+    // Создание панельки с кнопками, управляющими созданием графа
     private JPanel createGraphButtons() {
         JPanel graphButtons = new JPanel(/*new GridLayout(1, 2)*/);
         graphButtons.setBackground(new Color(229, 212, 217));
@@ -84,14 +90,14 @@ public class MainWindow extends JPanel {
         return graphButtons;
     }
 
-    // РЎРѕР·РґР°РЅРёРµ РїР°РЅРµР»СЊРєРё, РѕС‚РІРµС‡Р°СЋС‰РµР№ Р·Р° РґРѕР±Р°РІР»РµРЅРёРµ СЂРµР±СЂР°
+    // Создание панельки, отвечающей за добавление ребра
     private JPanel createAddEdge(){
 
         JTextField vertexName1 = new JTextField(); vertexName1.setPreferredSize( new Dimension(25,19));
         JTextField vertexName2 = new JTextField(); vertexName2.setPreferredSize( new Dimension(25,19));
         JTextField edgeWeight  = new JTextField();  edgeWeight.setPreferredSize( new Dimension(25,19));
 
-        JButton addEdjeButton = new JButton(new AbstractAction("Р”РѕР±Р°РІРёС‚СЊ СЂРµР±СЂРѕ") {
+        JButton addEdjeButton = new JButton(new AbstractAction("Добавить ребро") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 createEdge(vertexName1, vertexName2, edgeWeight);
@@ -104,14 +110,14 @@ public class MainWindow extends JPanel {
 
         addEdge.add( Box.createVerticalStrut(1));
         addEdge.add(addEdjeButton);
-        addEdge.add( glueParametrs(new JLabel("Р’РµСЂС€.1"),vertexName1 ) );
-        addEdge.add( glueParametrs(new JLabel("Р’РµСЂС€.2"),vertexName2 ) );
-        addEdge.add( glueParametrs(new JLabel("Р’РµСЃ"   ), edgeWeight ) );
+        addEdge.add( glueParametrs(new JLabel("Верш.1"),vertexName1 ) );
+        addEdge.add( glueParametrs(new JLabel("Верш.2"),vertexName2 ) );
+        addEdge.add( glueParametrs(new JLabel("Вес"   ), edgeWeight ) );
 
         return addEdge;
     }
 
-    // РЎРєР»РµР№РєР° РѕРєРѕС€С€РєР° РґР»СЏ РІРІРѕРґР° Рё С‚РµРєСЃС‚Р°
+    // Склейка окошшка для ввода и текста
     private JPanel glueParametrs(JLabel f1, JTextField f2) {
         JPanel parametr = new JPanel();
         parametr.add(f1);
@@ -119,23 +125,72 @@ public class MainWindow extends JPanel {
         return parametr;
     }
 
-    //РЎРѕР·РґР°РЅРёРµ РєРЅРѕРїРєРё, РґРѕР±Р°РІР»СЏСЋС‰РµР№ РІ РіСЂР°С„ РІРµСЂС€РёРЅ
+    //Создание кнопки, добавляющей в граф вершин
     private JButton createAddVertex() {
-        return new JButton(new AbstractAction("Р”РѕР±Р°РІРёС‚СЊ РІРµСЂС€РёРЅСѓ") {
+        return new JButton(new AbstractAction("Добавить вершину") {
             @Override
             public void actionPerformed(ActionEvent e) { addVertex(); }
         });
     }
 
+    ///////////////////
+    //////////////////
+    // Функции кнопок
     private void startAlgorithm() {}
-    private void nextStep() {}
+    private void nextStep() {
+        algorithm.GO();
+        repaint();
+    }
     private void result() {}
     private void clearAll() {}
-    private void createEdge(JTextField vertexName1, JTextField vertexName2, JTextField edgeWeight) {
 
+    private void createEdge( JTextField vertexName1, JTextField vertexName2, JTextField edgeWeight) {
+        Graph.Edge edge = new Graph.Edge(-1,-1,-1);
+        try {
+            edge.v1 = Integer.parseInt(vertexName1.getText());
+            edge.v2 = Integer.parseInt(vertexName2.getText());
+            edge.weight = Integer.parseInt(edgeWeight.getText());
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Ошибка: концы и вес ребра должны задаваться натуральными числами",
+                    "Ошибка типа данных",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+
+        if (  edge.weight <= 0) {
+            JOptionPane.showMessageDialog(this,
+                    "Ошибка: Вес ребра должен задаваться натуральным числом",
+                    "Ошибка типа данных",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+
+        try {
+            algorithm.getBase().addE(edge);
+        }
+        catch (RuntimeException exception) {
+            JOptionPane.showMessageDialog(this,
+                    "Ошибка: " + exception.getLocalizedMessage(),
+                    "Ошибка добавления ребра",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        repaint();
     }
+
     private void addVertex(){
+        ((AdjacenyList)algorithm.getBase()).addV(algorithm.getBase().getKolV());
+        graphField.addV();
+        repaint();
     }
+
+
+
 
 
 }
