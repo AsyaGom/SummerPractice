@@ -1,15 +1,16 @@
-﻿package Window;
+package Window;
+
+import Algorithm.Algorithm;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GraphField extends JPanel {
+    Algorithm algorithm;
 
-
-    GraphField() {
+    GraphField(Algorithm algorithm) {
         setPreferredSize( new Dimension(600,500));    //Размер рамки
-
-
+        this.algorithm = algorithm;
     }
 
 

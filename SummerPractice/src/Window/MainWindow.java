@@ -1,7 +1,7 @@
-﻿package Window;
+package Window;
 
-import Algorithm.Algorithm;
-import Graph.Graph;
+import Algorithm.*;
+import Graph.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 
 public class MainWindow extends JPanel {
 
-    private Graph graph;
+    //private Graph graph;
     private Algorithm algorithm;
     ///////////////////////////////
 
@@ -17,10 +17,8 @@ public class MainWindow extends JPanel {
         setBackground(new Color(161, 151, 225));    //Установим цвет заднего фона
 
         add( createButtons() );
-        add(new GraphField() );
+        add(new GraphField( (algorithm = new APD(new AdjacenyList(), new AdjacenyList())) ) );
 
-        this.graph = graph;
-        this.algorithm = algorithm;
     }
 
 
@@ -136,7 +134,8 @@ public class MainWindow extends JPanel {
     private void createEdge(JTextField vertexName1, JTextField vertexName2, JTextField edgeWeight) {
 
     }
-    private void addVertex(){}
+    private void addVertex(){
+    }
 
 
 }
