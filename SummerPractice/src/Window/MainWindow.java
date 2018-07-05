@@ -16,7 +16,7 @@ public class MainWindow extends JPanel {
         algorithm = new APD(new AdjacenyList(), new AdjacenyList());
 
 
-        setBackground(new Color(161, 151, 225));    //Установим цвет заднего фона
+        setBackground(new Color(225, 219, 180));    //Установим цвет заднего фона
 
         add( createButtons() );
         graphField = new GraphField( (algorithm));
@@ -29,7 +29,7 @@ public class MainWindow extends JPanel {
     private JPanel createButtons() {
         JPanel panel = new JPanel( /*Box.createVerticalBox()*/ );
         Box box = Box.createVerticalBox();
-        panel.setBackground(new Color(49, 248, 255));
+        panel.setBackground(new Color(8, 99, 21));
 
         box.add(createGraphButtons());
         box.add(createAlgorithmButtons());
@@ -78,7 +78,7 @@ public class MainWindow extends JPanel {
     // Создание панельки с кнопками, управляющими созданием графа
     private JPanel createGraphButtons() {
         JPanel graphButtons = new JPanel(/*new GridLayout(1, 2)*/);
-        graphButtons.setBackground(new Color(229, 212, 217));
+        graphButtons.setBackground(new Color(92, 140, 111));
 
         graphButtons.add(createAddEdge());
         graphButtons.add(createAddVertex());

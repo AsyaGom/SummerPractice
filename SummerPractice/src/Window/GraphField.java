@@ -65,12 +65,12 @@ public class GraphField extends JPanel {
     @Override
     public void paint(Graphics g) {
 
-        g.setColor( new Color(255, 68, 67));
+        g.setColor( new Color(36, 88, 36));
         g.fillRect(0,0,1000,1000);
 
         drawGraph(g);
 
-        g.setColor( new Color(0, 0, 0));             // Цвет рамки
+        g.setColor( new Color(225, 219, 180));             // Цвет рамки
         ((Graphics2D)g).setStroke(new BasicStroke(4));  // Толщина рамки
         g.drawRect( 0, 0, 600, 500);        // Нарисовать рамку
 
@@ -84,10 +84,10 @@ public class GraphField extends JPanel {
     private void drawGraph(Graphics g) {
         Graph.Edge edge;
 
-        Color baseV = new Color(81, 115, 204);
-        Color resultV = new Color(37, 204, 8);
+        Color baseV = new Color(146, 210, 255);
+        Color resultV = new Color(125, 168, 229);
 
-        Color baseE = new Color(110, 214, 82);
+        Color baseE = new Color(201, 199, 92);
         Color resultE = new Color(177, 166, 204);
 
         for (int i=0; i<points.size(); i++) {
@@ -115,7 +115,7 @@ public class GraphField extends JPanel {
 
         ((Graphics2D)g).setStroke(new BasicStroke(1));  // Устанавливаем толщину ребра
 
-        g.setColor( new Color(1,1,1) );
+        g.setColor( new Color(225, 219, 180) );
         g.drawLine(v1.x, v1.y, v2.x, v2.y);
 
         int x = (v1.x+v2.x)/2;
