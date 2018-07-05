@@ -9,16 +9,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Scanner;
 
 
 public class GraphField extends JPanel {
     int VSize = 50;
     Algorithm algorithm;
-    ArrayList<Point> points = new ArrayList<Point>();
+    ArrayList<ActiveVertex> points = new ArrayList<ActiveVertex>();
 
     GraphField(Algorithm algorithm) {
+
+        setLayout(null);
         setPreferredSize( new Dimension(600,500));    //Размер рамки
         this.algorithm = algorithm;
 
@@ -39,12 +40,9 @@ public class GraphField extends JPanel {
         }
 
         algorithm.getBase().addV(algorithm.getBase().getKolV());
+        points.add( new ActiveVertex(this, points.size()));
 
-        Random random = new Random();
-
-        points.add(new Point(random.nextInt(600-VSize), random.nextInt(500-VSize)));
-
-        //add(new ActiveVertex(points.get(points.size()-1)));
+        add(points.get(points.size()-1));
     }
     public void addE(Graph.Edge edge){
         try {
@@ -90,19 +88,19 @@ public class GraphField extends JPanel {
         Color baseE = new Color(201, 199, 92);
         Color resultE = new Color(177, 166, 204);
 
-        for (int i=0; i<points.size(); i++) {
+        for (ActiveVertex i: points) {
 
-            boolean inRes = algorithm.getResult().checkV(i)!=null ? true : false;
+            boolean inRes = algorithm.getResult().checkV(i.v)!=null ? true : false;
 
-            for(int j=i; j < points.size(); j++){
-                if ( ( edge = algorithm.getBase().checkE(i,j)) != null ) {
+            for(int j=i.v; j < points.size(); j++){
+                if ( ( edge = algorithm.getBase().checkE(i.v,j)) != null ) {
                     Color color;
-                    if (inRes && (algorithm.getResult().checkE(i,j)!= null) ) color = resultE;
+                    if (inRes && (algorithm.getResult().checkE(i.v,j)!= null) ) color = resultE;
                     else color = baseE;
                     drawEdge(g, edge, color);
                 }
                 g.setColor(inRes ? resultV : baseV);
-                drawVertex(g, i);
+                drawVertex(g, i.v);
             }
         }
     }
@@ -110,8 +108,8 @@ public class GraphField extends JPanel {
     //Отрисовка ребра
     private void drawEdge(Graphics g, Graph.Edge edge, Color color){
 
-        Point v1 = new Point(points.get(edge.v1).x+VSize/2, points.get(edge.v1).y+VSize/2);
-        Point v2 = new Point(points.get(edge.v2).x+VSize/2, points.get(edge.v2).y+VSize/2);
+        Point v1 = new Point(points.get(edge.v1).point.x, points.get(edge.v1).point.y);
+        Point v2 = new Point(points.get(edge.v2).point.x, points.get(edge.v2).point.y);
 
         ((Graphics2D)g).setStroke(new BasicStroke(1));  // Устанавливаем толщину ребра
 
@@ -133,8 +131,8 @@ public class GraphField extends JPanel {
 
     // Отрисовка вершины
     private void drawVertex(Graphics g, int v) {
-        drawCircle(g, points.get(v).x+VSize/2,  points.get(v).y+VSize/2, VSize/2);
-        drawInt(g, points.get(v).x+VSize/2, points.get(v).y+VSize/2, v);
+        drawCircle(g, points.get(v).point.x,  points.get(v).point.y, VSize/2);
+        drawInt(g, points.get(v).point.x, points.get(v).point.y, v);
     }
 
     // Пишет text в точку (x,y)
@@ -164,7 +162,7 @@ public class GraphField extends JPanel {
 
 
     public void clear() {
-        if (!algorithm.getStartFlag()) points = new ArrayList<Point>();
+        if (!algorithm.getStartFlag()) points = new ArrayList<ActiveVertex>();
         algorithm.clear();
     }
 
