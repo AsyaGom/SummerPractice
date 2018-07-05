@@ -16,7 +16,39 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Par_s.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Window/Par_s.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GraphField.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Window/GraphField.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="145" column="65" selection-start-line="145" selection-start-column="65" selection-end-line="145" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#GraphField#0;class#GraphField#0" />
+                <element signature="method#addV#0;class#GraphField#0" />
+                <element signature="method#addE#0;class#GraphField#0" />
+                <element signature="method#paint#0;class#GraphField#0" />
+                <element signature="method#drawGraph#0;class#GraphField#0" />
+                <element signature="method#drawEdge#0;class#GraphField#0" />
+                <element signature="method#drawVertex#0;class#GraphField#0" />
+                <element signature="method#drawCircle#0;class#GraphField#0" />
+                <element signature="method#clear#0;class#GraphField#0" />
+                <element signature="method#fitchaForFastCreateGraphFromFile#0;class#GraphField#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -60,11 +92,13 @@
         <option value="$PROJECT_DIR$/src/Algorithm/APD.java" />
         <option value="$PROJECT_DIR$/src/Graph/AdjacenyList.java" />
         <option value="$PROJECT_DIR$/src/Graph/Graph.java" />
-        <option value="$PROJECT_DIR$/src/Window/Main.java" />
         <option value="$PROJECT_DIR$/src/Algorithm/Algorithm.java" />
+        <option value="$PROJECT_DIR$/src/Window/Parameter.java" />
+        <option value="$PROJECT_DIR$/src/Window/Main.java" />
         <option value="$PROJECT_DIR$/src/Window/MainWindow.java" />
         <option value="$PROJECT_DIR$/src/Window/ActiveVertex.java" />
         <option value="$PROJECT_DIR$/src/Window/GraphField.java" />
+        <option value="$PROJECT_DIR$/src/Window/Par_s.java" />
       </list>
     </option>
   </component>
@@ -79,6 +113,7 @@
     <panes>
       <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -86,15 +121,31 @@
               <item name="SummerPractice" type="b2602c69:ProjectViewProjectNode" />
               <item name="SummerPractice" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="SummerPractice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SummerPractice" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SummerPractice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SummerPractice" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Graph" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SummerPractice" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SummerPractice" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Window" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/out" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -215,6 +266,7 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.3034258" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
@@ -225,7 +277,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2579425" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11270802" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -238,7 +290,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.7487765" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.3048576" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
@@ -274,17 +325,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="11" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Window/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Window/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
@@ -424,48 +468,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Graph/Graph.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Algorithm/APD.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1540">
           <caret line="77" column="1" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Window/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Window/ActiveVertex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#ActiveVertex#0;class#ActiveVertex#0" />
-            <element signature="method#mousePressed#0;class#ActiveVertex#0" />
-            <element signature="method#mouseDragged#0;class#ActiveVertex#0" />
-            <element signature="method#mouseClicked#0;class#ActiveVertex#0" />
-            <element signature="method#mouseEntered#0;class#ActiveVertex#0" />
-            <element signature="method#mouseExited#0;class#ActiveVertex#0" />
-            <element signature="method#mouseMoved#0;class#ActiveVertex#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Window/GraphField.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="132" column="47" selection-start-line="132" selection-start-column="47" selection-end-line="132" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -476,22 +482,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Graph/Graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-498">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Window/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Window/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="257" selection-start-line="257" selection-end-line="257" />
+        <state relative-caret-position="-2305">
+          <caret line="91" column="34" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
           <folding>
-            <element signature="e#1256#1257#0" expanded="true" />
-            <element signature="e#1304#1305#0" expanded="true" />
-            <element signature="e#1533#1534#0" expanded="true" />
-            <element signature="e#1575#1576#0" expanded="true" />
-            <element signature="e#1800#1801#0" expanded="true" />
-            <element signature="e#1840#1841#0" expanded="true" />
-            <element signature="e#2063#2064#0" expanded="true" />
-            <element signature="e#2105#2106#0" expanded="true" />
-            <element signature="e#3157#3158#0" expanded="true" />
-            <element signature="e#3237#3238#0" expanded="true" />
+            <element signature="method#MainWindow#0;class#MainWindow#0" />
+            <element signature="method#createAlgorithmButtons#0;class#MainWindow#0" />
+            <element signature="method#createGraphButtons#0;class#MainWindow#0" />
+            <element signature="method#createAddEdge#0;class#MainWindow#0" />
+            <element signature="class#3045:3248" />
+            <element signature="method#glueParametrs#0;class#MainWindow#0" />
+            <element signature="method#createAddVertex#0;class#MainWindow#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Window/ActiveVertex.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1035">
+          <caret line="62" column="70" selection-start-line="62" selection-start-column="70" selection-end-line="62" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Window/GraphField.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="145" column="65" selection-start-line="145" selection-start-column="65" selection-end-line="145" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#GraphField#0;class#GraphField#0" />
+            <element signature="method#addV#0;class#GraphField#0" />
+            <element signature="method#addE#0;class#GraphField#0" />
+            <element signature="method#paint#0;class#GraphField#0" />
+            <element signature="method#drawGraph#0;class#GraphField#0" />
+            <element signature="method#drawEdge#0;class#GraphField#0" />
+            <element signature="method#drawVertex#0;class#GraphField#0" />
+            <element signature="method#drawCircle#0;class#GraphField#0" />
+            <element signature="method#clear#0;class#GraphField#0" />
+            <element signature="method#fitchaForFastCreateGraphFromFile#0;class#GraphField#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Window/Par_s.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
         </state>
       </provider>
     </entry>

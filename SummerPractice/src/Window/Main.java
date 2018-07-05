@@ -14,12 +14,11 @@ public class Main extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setTitle("Алгоритм Яника-Прима-Дейкстры");      //Имя окна
-        setSize(941, 550);                            //Размер окна
+        setSize(Par_s.WINDOW_SIZE);                            //Размер окна
 
-        setBackground( new Color(10,10,10));
+        setResizable(false);
+
         add( new MainWindow(), BorderLayout.WEST );  // Размещение панельки с кнопками и изображением графа слева
-        setBackground( new Color(10,10,10));
-
 
         setVisible(true);
     }

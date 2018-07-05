@@ -16,7 +16,7 @@ public class MainWindow extends JPanel {
         algorithm = new APD(new AdjacenyList(), new AdjacenyList());
 
 
-        setBackground(new Color(225, 219, 180));    //Установим цвет заднего фона
+        setBackground(Par_s.BACKGROUND);    //Установим цвет заднего фона
 
         add( createButtons() );
         graphField = new GraphField( (algorithm));
@@ -27,9 +27,9 @@ public class MainWindow extends JPanel {
 
 
     private JPanel createButtons() {
-        JPanel panel = new JPanel( /*Box.createVerticalBox()*/ );
+        JPanel panel = new JPanel( );
         Box box = Box.createVerticalBox();
-        panel.setBackground(new Color(8, 99, 21));
+        panel.setBackground(Par_s.BUTTENS_BORDER);
 
         box.add(createGraphButtons());
         box.add(createAlgorithmButtons());
@@ -77,13 +77,13 @@ public class MainWindow extends JPanel {
 
     // Создание панельки с кнопками, управляющими созданием графа
     private JPanel createGraphButtons() {
-        JPanel graphButtons = new JPanel(/*new GridLayout(1, 2)*/);
-        graphButtons.setBackground(new Color(92, 140, 111));
+        JPanel graphButtons = new JPanel();
+        graphButtons.setBackground(Par_s.CREATE_BUTTONS_BG);
 
         graphButtons.add(createAddEdge());
         graphButtons.add(createAddVertex());
 
-        graphButtons.setPreferredSize( new Dimension(300,200));
+        graphButtons.setPreferredSize( Par_s.CREATE_GRAPH_PANEL_SIZE);
 
         return graphButtons;
     }
@@ -91,9 +91,9 @@ public class MainWindow extends JPanel {
     // Создание панельки, отвечающей за добавление ребра
     private JPanel createAddEdge(){
 
-        JTextField vertexName1 = new JTextField(); vertexName1.setPreferredSize( new Dimension(25,19));
-        JTextField vertexName2 = new JTextField(); vertexName2.setPreferredSize( new Dimension(25,19));
-        JTextField edgeWeight  = new JTextField();  edgeWeight.setPreferredSize( new Dimension(25,19));
+        JTextField vertexName1 = new JTextField(); vertexName1.setPreferredSize( Par_s.SIZE_OF_INPUT_FIELD );
+        JTextField vertexName2 = new JTextField(); vertexName2.setPreferredSize( Par_s.SIZE_OF_INPUT_FIELD );
+        JTextField edgeWeight  = new JTextField();  edgeWeight.setPreferredSize( Par_s.SIZE_OF_INPUT_FIELD );
 
         JButton addEdjeButton = new JButton(new AbstractAction("Добавить ребро") {
             @Override
@@ -101,8 +101,6 @@ public class MainWindow extends JPanel {
                 createEdge(vertexName1, vertexName2, edgeWeight);
             }
         });
-
-
 
         JPanel addEdge = new JPanel( new GridLayout(5,1) );
 
