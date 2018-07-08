@@ -15,11 +15,13 @@ public abstract class Graph {
 
     abstract public boolean addE(Edge e);
 
+    abstract public boolean removeV(Vertex v);
+
+    abstract public boolean removeE(Edge e);
+
     abstract public Vertex checkV(int v);
 
     abstract public Edge checkE(int v1, int v2);
-
-    abstract public Edge getMinE(int v);
 
     abstract public int kolEinV(int v);
 
