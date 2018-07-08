@@ -93,9 +93,9 @@ public class MainWindow extends JPanel {
     // Создание панельки, отвечающей за добавление ребра
     private JPanel createAddEdge(){
 
-        JTextField vertexName1 = new JTextField(); vertexName1.setPreferredSize( new Dimension(25,19));
-        JTextField vertexName2 = new JTextField(); vertexName2.setPreferredSize( new Dimension(25,19));
-        JTextField edgeWeight  = new JTextField();  edgeWeight.setPreferredSize( new Dimension(25,19));
+        JTextField vertexName1 = new JTextField(); vertexName1.setPreferredSize( SIZE_OF_INPUT_FIELD );
+        JTextField vertexName2 = new JTextField(); vertexName2.setPreferredSize( SIZE_OF_INPUT_FIELD );
+        JTextField edgeWeight  = new JTextField();  edgeWeight.setPreferredSize( SIZE_OF_INPUT_FIELD );
 
         JButton addEdjeButton = new JButton(new AbstractAction("Добавить ребро") {
             @Override
@@ -133,7 +133,7 @@ public class MainWindow extends JPanel {
     //Создание кнопки, добавляющей в граф вершин
     private JPanel createAddVertex(){
 
-        JTextField vertexName = new JTextField(); vertexName.setPreferredSize( new Dimension(25,19));
+        JTextField vertexName = new JTextField(); vertexName.setPreferredSize( SIZE_OF_INPUT_FIELD );
 
         JButton addVertexButton = new JButton(new AbstractAction("Добавить вершину") {
             @Override
