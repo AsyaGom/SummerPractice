@@ -37,6 +37,29 @@ public class AdjacenyList extends Graph {
     }
 
     @Override
+    public boolean removeV(Vertex v) {
+        if (!adjacenyList.containsKey(v.v)) throw new RuntimeException("Такой вершины нет");
+
+        adjacenyList.remove(v.v);
+        kolV--;
+        return true;
+    }
+
+    @Override
+    public boolean removeE(Edge e) {
+
+        if ( !adjacenyList.containsKey(e.v1) ) throw new RuntimeException("Вершина "+e.v1+" не существует");
+        if ( !adjacenyList.containsKey(e.v2) ) throw new RuntimeException("Вершина "+e.v2+" не существует");
+        if ( !adjacenyList.get(e.v1).way.containsKey(e.v2)) throw new RuntimeException("Данное ребро не существует");
+
+        adjacenyList.get(e.v1).way.remove(e.v2);
+        adjacenyList.get(e.v2).way.remove(e.v1);
+
+        kolE--;
+        return true;
+    }
+
+    @Override
     public Vertex checkV(int v) {
         return adjacenyList.get(v);
     }
@@ -49,20 +72,6 @@ public class AdjacenyList extends Graph {
             return i==null ? null : new Edge(v1,v2,i.intValue());
         }
         return null;
-    }
-
-    @Override
-    public Edge getMinE(int v) {
-        int minW = Integer.MAX_VALUE;
-        int v2 = v;
-
-        for(Map.Entry<Integer,Integer> vertex: adjacenyList.get(v).way.entrySet() ) {
-            if (vertex.getValue().intValue() < minW) {
-                minW = vertex.getValue().intValue();
-                v2 = vertex.getKey().intValue();
-            }
-        }
-        return new Edge(v, v2, minW);
     }
 
     @Override
