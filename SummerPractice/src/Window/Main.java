@@ -3,6 +3,8 @@ package Window;
 import javax.swing.*;
 import java.awt.*;
 
+import static Window.PAR_S.*;
+
 public class Main extends JFrame {
 
     ///////
@@ -14,7 +16,7 @@ public class Main extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setTitle("Алгоритм Яника-Прима-Дейкстры");      //Имя окна
-        setSize(Par_s.WINDOW_SIZE);                            //Размер окна
+        setSize( WINDOW_SIZE );                            //Размер окна
 
         setResizable(false);
 

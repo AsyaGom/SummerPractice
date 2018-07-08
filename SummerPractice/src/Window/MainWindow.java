@@ -307,7 +307,7 @@ public class MainWindow extends JPanel {
             return;
         }
 
-        //graphField.removeE(edge);
+        graphField.removeE(edge);
 
     }
 
@@ -339,7 +339,7 @@ public class MainWindow extends JPanel {
             return;
         }
 
-        //graphField.removeV(v);
+        graphField.removeV(v);
         repaint();
     }
 }
