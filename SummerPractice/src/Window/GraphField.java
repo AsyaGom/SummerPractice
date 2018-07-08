@@ -9,22 +9,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.Scanner;
 
 
 public class GraphField extends JPanel {
-    int VSize = 50;
     Algorithm algorithm;
-    ArrayList<Point> points = new ArrayList<Point>();
+    ArrayList<ActiveVertex> points = new ArrayList<ActiveVertex>();
 
     GraphField(Algorithm algorithm) {
-        setPreferredSize( new Dimension(600,500));    //Размер рамки
+
+        setLayout(null);
+        setPreferredSize( Par_s.SIZE_OF_GRAPH_FIELD);    //Размер рамки
         this.algorithm = algorithm;
 
         fitchaForFastCreateGraphFromFile();
     }
-
 
 
 
@@ -39,12 +38,9 @@ public class GraphField extends JPanel {
         }
 
         algorithm.getBase().addV(algorithm.getBase().getKolV());
+        points.add( new ActiveVertex(this, points.size()));
 
-        Random random = new Random();
-
-        points.add(new Point(random.nextInt(600-VSize), random.nextInt(500-VSize)));
-
-        //add(new ActiveVertex(points.get(points.size()-1)));
+        add(points.get(points.size()-1));
     }
     public void addE(Graph.Edge edge){
         try {
@@ -65,44 +61,38 @@ public class GraphField extends JPanel {
     @Override
     public void paint(Graphics g) {
 
-        g.setColor( new Color(36, 88, 36));
-        g.fillRect(0,0,1000,1000);
+        g.setColor( Par_s.GRAPH_FIELD_BACKGROUND);
+        g.fillRect(0,0,100000,100000);
 
         drawGraph(g);
 
-        g.setColor( new Color(225, 219, 180));             // Цвет рамки
+        g.setColor( Par_s.GRAPH_FIELD_BORDER);                // Цвет рамки
         ((Graphics2D)g).setStroke(new BasicStroke(4));  // Толщина рамки
-        g.drawRect( 0, 0, 600, 500);        // Нарисовать рамку
+        g.drawRect( 0, 0,
+                     Par_s.SIZE_OF_GRAPH_FIELD.width,
+                     Par_s.SIZE_OF_GRAPH_FIELD.height);        // Нарисовать рамку
 
         g.drawString("KolV= " + algorithm.getBase().getKolV() , 10,15);
         g.drawString("KolE= " + algorithm.getBase().getKolE() , 10,25);
-
-        //repaint();
     }
 
     // Отрисовка графа
     private void drawGraph(Graphics g) {
         Graph.Edge edge;
 
-        Color baseV = new Color(146, 210, 255);
-        Color resultV = new Color(125, 168, 229);
+        for (ActiveVertex i: points) {
 
-        Color baseE = new Color(201, 199, 92);
-        Color resultE = new Color(177, 166, 204);
+            boolean inRes = algorithm.getResult().checkV(i.v)!=null ? true : false;
 
-        for (int i=0; i<points.size(); i++) {
-
-            boolean inRes = algorithm.getResult().checkV(i)!=null ? true : false;
-
-            for(int j=i; j < points.size(); j++){
-                if ( ( edge = algorithm.getBase().checkE(i,j)) != null ) {
+            for(int j=i.v; j < points.size(); j++){
+                if ( ( edge = algorithm.getBase().checkE(i.v,j)) != null ) {
                     Color color;
-                    if (inRes && (algorithm.getResult().checkE(i,j)!= null) ) color = resultE;
-                    else color = baseE;
+                    if (inRes && (algorithm.getResult().checkE(i.v,j)!= null) ) color = Par_s.RESULT_EDGE_COLOR;
+                    else color = Par_s.BASE_EDGE_COLOR;
                     drawEdge(g, edge, color);
                 }
-                g.setColor(inRes ? resultV : baseV);
-                drawVertex(g, i);
+                g.setColor(inRes ? Par_s.RESULT_VERTEX_COLOR : Par_s.BASE_VERTEX_COLOR);
+                drawVertex(g, i.v);
             }
         }
     }
@@ -110,37 +100,37 @@ public class GraphField extends JPanel {
     //Отрисовка ребра
     private void drawEdge(Graphics g, Graph.Edge edge, Color color){
 
-        Point v1 = new Point(points.get(edge.v1).x+VSize/2, points.get(edge.v1).y+VSize/2);
-        Point v2 = new Point(points.get(edge.v2).x+VSize/2, points.get(edge.v2).y+VSize/2);
+        Point v1 = new Point(points.get(edge.v1).point.x, points.get(edge.v1).point.y);
+        Point v2 = new Point(points.get(edge.v2).point.x, points.get(edge.v2).point.y);
 
-        ((Graphics2D)g).setStroke(new BasicStroke(1));  // Устанавливаем толщину ребра
+        ((Graphics2D)g).setStroke(Par_s.EDGE_LINE_THIKNESS);  // Устанавливаем толщину ребра
 
-        g.setColor( new Color(225, 219, 180) );
+        g.setColor( Par_s.EDGE_LINE_COLOR );
         g.drawLine(v1.x, v1.y, v2.x, v2.y);
 
         int x = (v1.x+v2.x)/2;
         int y = (v1.y+v2.y)/2;
 
         g.setColor(color);
-        g.fillOval(x-14, y-14, 28,28);
+        g.fillOval(x-14, y-14, Par_s.EDJE_CIRKLE_R,Par_s.EDJE_CIRKLE_R);
 
-        ((Graphics2D)g).setStroke(new BasicStroke(2));
-        g.setColor(new Color(0, 0, 0));//g.setColor(new Color(5, 89, 0));
-        g.drawOval(x-14, y-14, 28,28);
+        ((Graphics2D)g).setStroke(Par_s.EDGE_CIRKLE_LINE_THKNESS);
+        g.setColor(Par_s.EDGE_CIRKLE_LINE_COLOR);
+        g.drawOval(x-14, y-14, Par_s.EDJE_CIRKLE_R,Par_s.EDJE_CIRKLE_R);
 
         drawInt(g, x, y, edge.weight);
     }
 
     // Отрисовка вершины
     private void drawVertex(Graphics g, int v) {
-        drawCircle(g, points.get(v).x+VSize/2,  points.get(v).y+VSize/2, VSize/2);
-        drawInt(g, points.get(v).x+VSize/2, points.get(v).y+VSize/2, v);
+        drawCircle(g, points.get(v).point.x,  points.get(v).point.y, Par_s.VERTEX_R);
+        drawInt(g, points.get(v).point.x, points.get(v).point.y, v);
     }
 
     // Пишет text в точку (x,y)
     private void drawInt(Graphics g, int x, int y, int text) {
-        g.setColor(Color.BLACK);
-        Font font = new Font("Default", Font.PLAIN, 14);  //Шрифт
+        g.setColor(Par_s.TEXT_COLOR);
+        Font font = new Font("Default", Font.PLAIN, Par_s.TEXT_SIZE);  //Шрифт
 
         g.setFont(font);
 
@@ -157,14 +147,14 @@ public class GraphField extends JPanel {
         g.fillOval(cX-rad, cY-rad, rad*2, rad*2);
 
         ((Graphics2D)g).setStroke(new BasicStroke(2));
-        g.setColor(new Color(0, 0, 0));
+        g.setColor(Par_s.CIRCLE_BORDERLINE_COLOR);
         g.drawOval(cX-rad, cY-rad, rad*2, rad*2);
     }
 
 
 
     public void clear() {
-        if (!algorithm.getStartFlag()) points = new ArrayList<Point>();
+        if (!algorithm.getStartFlag()) points = new ArrayList<ActiveVertex>();
         algorithm.clear();
     }
 
