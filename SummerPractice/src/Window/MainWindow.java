@@ -6,6 +6,10 @@ import Graph.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+
+import static Window.PAR_S.*;
+
+
 public class MainWindow extends JPanel {
 
     private Algorithm algorithm;
@@ -15,8 +19,7 @@ public class MainWindow extends JPanel {
     public MainWindow() {
         algorithm = new APD(new AdjacenyList(), new AdjacenyList());
 
-
-        setBackground(Par_s.BACKGROUND);    //Установим цвет заднего фона
+        setBackground( BACKGROUND );    //Установим цвет заднего фона
 
         add( createButtons() );
         graphField = new GraphField( (algorithm));
@@ -29,7 +32,7 @@ public class MainWindow extends JPanel {
     private JPanel createButtons() {
         JPanel panel = new JPanel( );
         Box box = Box.createVerticalBox();
-        panel.setBackground(Par_s.BUTTENS_BORDER);
+        panel.setBackground( BUTTENS_BORDER );
 
         box.add(createGraphButtons());
         box.add(createAlgorithmButtons());
@@ -71,19 +74,18 @@ public class MainWindow extends JPanel {
             }
         }));
 
-
         return algorithmButtons;
     }
 
     // Создание панельки с кнопками, управляющими созданием графа
     private JPanel createGraphButtons() {
         JPanel graphButtons = new JPanel();
-        graphButtons.setBackground(Par_s.CREATE_BUTTONS_BG);
+        graphButtons.setBackground( CREATE_BUTTONS_BG );
 
         graphButtons.add(createAddEdge());
         graphButtons.add(createAddVertex());
 
-        graphButtons.setPreferredSize( Par_s.CREATE_GRAPH_PANEL_SIZE);
+        graphButtons.setPreferredSize( CREATE_GRAPH_PANEL_SIZE );
 
         return graphButtons;
     }
@@ -91,9 +93,9 @@ public class MainWindow extends JPanel {
     // Создание панельки, отвечающей за добавление ребра
     private JPanel createAddEdge(){
 
-        JTextField vertexName1 = new JTextField(); vertexName1.setPreferredSize( Par_s.SIZE_OF_INPUT_FIELD );
-        JTextField vertexName2 = new JTextField(); vertexName2.setPreferredSize( Par_s.SIZE_OF_INPUT_FIELD );
-        JTextField edgeWeight  = new JTextField();  edgeWeight.setPreferredSize( Par_s.SIZE_OF_INPUT_FIELD );
+        JTextField vertexName1 = new JTextField(); vertexName1.setPreferredSize( new Dimension(25,19));
+        JTextField vertexName2 = new JTextField(); vertexName2.setPreferredSize( new Dimension(25,19));
+        JTextField edgeWeight  = new JTextField();  edgeWeight.setPreferredSize( new Dimension(25,19));
 
         JButton addEdjeButton = new JButton(new AbstractAction("Добавить ребро") {
             @Override
@@ -102,10 +104,17 @@ public class MainWindow extends JPanel {
             }
         });
 
+        JButton deleteEdjeButton = new JButton(new AbstractAction("Удалить ребро") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteEdge(vertexName1, vertexName2);
+            }
+        });
+
         JPanel addEdge = new JPanel( new GridLayout(5,1) );
 
-        addEdge.add( Box.createVerticalStrut(1));
         addEdge.add(addEdjeButton);
+        addEdge.add(deleteEdjeButton);
         addEdge.add( glueParametrs(new JLabel("Верш.1"),vertexName1 ) );
         addEdge.add( glueParametrs(new JLabel("Верш.2"),vertexName2 ) );
         addEdge.add( glueParametrs(new JLabel("Вес"   ), edgeWeight ) );
@@ -122,11 +131,29 @@ public class MainWindow extends JPanel {
     }
 
     //Создание кнопки, добавляющей в граф вершин
-    private JButton createAddVertex() {
-        return new JButton(new AbstractAction("Добавить вершину") {
+    private JPanel createAddVertex(){
+
+        JTextField vertexName = new JTextField(); vertexName.setPreferredSize( new Dimension(25,19));
+
+        JButton addVertexButton = new JButton(new AbstractAction("Добавить вершину") {
             @Override
             public void actionPerformed(ActionEvent e) { addVertex(); }
         });
+
+        JButton deleteVertexButton = new JButton(new AbstractAction("Удалить вершину") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteVertex(vertexName);
+            }
+        });
+
+        JPanel addVertex = new JPanel( new GridLayout(3,1) );
+
+        addVertex.add(addVertexButton);
+        addVertex.add(deleteVertexButton);
+        addVertex.add( glueParametrs(new JLabel("Верш."),vertexName ) );
+
+        return addVertex;
     }
 
     ///////////////////
@@ -248,8 +275,71 @@ public class MainWindow extends JPanel {
 
     }
 
+    private void deleteEdge( JTextField vertexName1, JTextField vertexName2) {
+        if (algorithm.getStartFlag()) {
+            JOptionPane.showMessageDialog(this,
+                    "Ошибка: запрещено удалять ребра пока алгоритм работает",
+                    "Ошибка удаления ребра",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+
+        Graph.Edge edge = new Graph.Edge(-1,-1,-1);
+        // Считывание параметров добавляемого ребра
+        try {
+            edge.v1 = Integer.parseInt(vertexName1.getText());
+            edge.v2 = Integer.parseInt(vertexName2.getText());
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Ошибка: концы ребра должны задаваться натуральными числами",
+                    "Ошибка удаления ребра",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (edge.v1==edge.v2) {
+            JOptionPane.showMessageDialog(this,
+                    "Ошибка: нельзя использовать петли",
+                    "Ошибка удаления ребра",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //graphField.removeE(edge);
+
+    }
+
     private void addVertex(){
         graphField.addV();
+        repaint();
+    }
+
+    private void deleteVertex(JTextField vertexName){
+        if (algorithm.getStartFlag()) {
+            JOptionPane.showMessageDialog(this,
+                    "Ошибка: запрещено удалять вершины пока алгоритм работает",
+                    "Ошибка удаления вершины",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+
+        Graph.Vertex v = new Graph.Vertex(-1);
+        // Считывание параметров добавляемого ребра
+        try {
+            v.v = Integer.parseInt(vertexName.getText());
+        }
+        catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Ошибка: номер вершины должен задаваться натуральным числом",
+                    "Ошибка удаления вершины",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //graphField.removeV(v);
         repaint();
     }
 }
